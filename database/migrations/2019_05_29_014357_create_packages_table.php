@@ -15,7 +15,12 @@ class CreatePackagesTable extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('packages', function($table) {
+          $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
